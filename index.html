@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="RED QUEEN: Safeguarding Large Language Models against Concealed Multi-Turn Jailbreaking">
+  <meta name="keywords" content="Red Queen, Jailbreak, Red Teaming">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RED QUEEN: Safeguarding Large Language Models against Concealed Multi-Turn Jailbreaking</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <!-- Custom Red Theme Styles -->
+  <style>
+    body {
+      background-color: #ffe5e5;
+    }
+    .navbar, .footer {
+      background-color: #b30000;
+    }
+    .navbar-item:hover, .button.is-dark:hover {
+      background-color: #ff4d4d;
+    }
+    .title, .subtitle, h1, h2, h3 {
+      color: #b30000;
+    }
+    .button.is-dark {
+      background-color: #b30000;
+      border-color: #b30000;
+    }
+    .button.is-dark .icon, .button.is-dark .icon i {
+      color: #fff;
+    }
+    .button.is-dark:hover {
+      background-color: #ff6666;
+    }
+    .hero {
+      background-color: #ffcccc;
+      border-bottom: 4px solid #b30000;
+    }
+    .section {
+      background-color: #ffe5e5;
+    }
+    .navbar-item:focus, .navbar-burger:focus, .button.is-dark:focus {
+      outline-color: #ff6666;
+    }
+    .content pre {
+      background-color: #ffe6e6;
+      border: 2px solid #b30000;
+      color: #b30000;
+    }
+    footer a {
+      color: white;
+    }
+    .footer p a:hover {
+      color: #ff6666;
+    }
+    figure img {
+      border: 3px solid #b30000;
+    }
+  </style>
+
+  <!-- JavaScript Files -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="./static/js/bulma-carousel.min.js"></script>
+  <script defer src="./static/js/bulma-slider.min.js"></script>
+  <script defer src="./static/js/index.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        <img src="./static/images/logo.png" alt="RED QUEEN Logo">
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="#abstract">Abstract</a>
+        <a class="navbar-item" href="#results">Results</a>
+        <a class="navbar-item" href="#guard">Red Queen Guard</a>
+        <a class="navbar-item" href="#bibtex">BibTeX</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+<section class="section hero">
+  <div class="container has-text-centered">
+    <h1 class="title is-1">RED QUEEN: Safeguarding Large Language Models against Concealed Multi-Turn Jailbreaking</h1>
+    <p class="subtitle is-4">
+      <span><a href="https://www.linkedin.com/in/yifan-jiang-29199122a/">Yifan Jiang</a><sup>1,2</sup>,</span>
+      <span><a href="https://www.linkedin.com/in/kriti-agg/">Kriti Aggarwal</a><sup>1</sup>,</span>
+      <span><a href="https://www.linkedin.com/in/tanmaylaud/">Tanmay Laud</a><sup>1</sup>,</span>
+      <span><a href="https://www.linkedin.com/in/kashifmuneir/">Kashif Munir</a><sup>1</sup>,</span>
+      <span><a href="https://www.jaypujara.org/">Jay Pujara</a><sup>2</sup>,</span>
+      <span><a href="https://subhomukherjee.com/">Subhabrata Mukherjee</a><sup>1</sup></span>
+    </p>
+    <p class="subtitle is-5">
+      <sup>1</sup>Hippocratic AI &nbsp; | &nbsp; <sup>2</sup>Information Sciences Institute, University of Southern California
+    </p>
+    <div class="buttons is-centered">
+      <a href="https://arxiv.org/abs/2409.17458" class="button is-dark is-rounded">
+        <span class="icon"><i class="fas fa-file-pdf"></i></span>
+        <span>Paper</span>
+      </a>
+      <a href="https://github.com/kriti-hippo/red_queen/tree/main" class="button is-dark is-rounded">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+    <a href="https://github.com/kriti-hippo/red_queen/blob/main/Data/Red_Queen_Attack.zip" class="button is-dark is-rounded">
+      <span class="icon"><i class="fas fa-database"></i></span>
+      <span>Red Queen Attack data</span>
+    </a>
+    <a href="https://github.com/kriti-hippo/red_queen/blob/main/DPO_Data/dpo_red_guard.json" class="button is-dark is-rounded">
+      <span class="icon"><i class="fas fa-database"></i></span>
+      <span>Red Queen Guard data</span>
+    </a>
+  </div>
+</section>
+
+  <!-- Teaser Section -->
+  <section class="section">
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column is-7">
+          <figure class="image is-3by2">
+            <img src="./static/images/example.png" alt="RED QUEEN Attack Example" >
+          </figure>
+        </div>
+        <div class="column is-5">
+          <figure class="image is-4by3">
+            <img src="./static/images/model_comparison_new.png" alt="Model Comparison">
+          </figure>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered mt-5">
+        <strong>RED QUEEN ATTACK</strong>, the first work constructing multi-turn scenarios
+        to conceal attackers' harmful intent, reaching promising results against current LLMs. Results show that all models are vulnerable, with GPT-4 reaching 87.62% success and Llama 3-70B reaching 75.4% success, and larger models proving more susceptible.
+      </h2>
+    </div>
+  </section>
+
+  <!-- Abstract Section -->
+  <section class="section" id="abstract">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Abstract</h2>
+      <div class="content is-medium">
+        <p>
+          The rapid progress of Large Language Models (LLMs) has opened up new opportunities across various domains and applications; yet it also presents challenges related to potential misuse. To mitigate such risks, red teaming has been employed as a proactive security measure to probe language models for harmful outputs via jailbreak attacks. However, current jailbreak attack approaches are single-turn with explicit malicious queries that do not fully capture the complexity of real-world interactions. In reality, users can engage in multi-turn interactions with LLM-based chat assistants, allowing them to conceal their true intentions in a more covert manner.
+        </p>
+        <p>
+          To bridge this gap, we propose a new jailbreak approach, <strong>RED QUEEN ATTACK</strong>. This method constructs a multi-turn scenario, concealing the malicious intent under the guise of preventing harm. We craft 40 scenarios that vary in turns and select 14 harmful categories to generate 56k multi-turn attack data points. We conduct comprehensive experiments on the RED QUEEN ATTACK with four representative LLM families of different sizes. Our experiments reveal that all LLMs are vulnerable to RED QUEEN ATTACK, reaching 87.62% attack success rate on GPT-4 and 75.4% on Llama 3-70B. Further analysis reveals that larger models are more susceptible to the RED QUEEN ATTACK, with multi-turn structures and concealment strategies contributing to its success.
+        </p>
+        <p>
+          To prioritize safety, we introduce a straightforward mitigation strategy called <strong>RED QUEEN GUARD</strong>, which aligns LLMs to effectively counter adversarial attacks. This approach reduces the attack success rate to below 1% while maintaining the model's performance across standard benchmarks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="section" id="results">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Main Results</h2>
+      <div class="columns">
+        <div class="column">
+          <h3 class="title is-4">Scenario Construction</h3>
+          <p>
+            To conceal the harmful intent, we create a general scenario template claiming that others are planning harmful actions and positioning the user as the protector:
+          </p>
+          <ul>
+            <li>User turn: describes others' harmful intent and seeks prevention methods.</li>
+            <li>Assistant turn: suggests possible steps, including reporting to authorities.</li>
+            <li>User turn: asks about possible evidence items.</li>
+            <li>Assistant turn: lists useful items, including a suspected preparation plan.</li>
+            <li>User turn: requests an example harmful plan for comparison.</li>
+          </ul>
+          <p>
+            We semi-automatically construct two types of scenarios, each with five categories:
+          </p>
+          <ul>
+            <li><strong>Occupation-Based Scenario:</strong> users with specific professions encounter someone in their work context like teachers, police, detectives, lawyers, and priests.</li>
+            <li><strong>Relation-Based Scenario:</strong> users interact with someone with whom they have a defined relationship like friends, neighbors, relatives, son, etc.</li>
+          </ul>
+          <figure class="image">
+            <img src="./static/images/scenario.png" alt="Scenario Construction">
+          </figure>
+        </div>
+        <div class="column">
+          <h3 class="title is-4">Attack Success Rates</h3>
+          <p>
+            RED QUEEN ATTACK achieves consistently high attack success rates (ASR) across all models, with an increase in ASR ranging from 15.45% to 81.44%. Different models exhibit varying levels of resilience and susceptibility to the RED QUEEN ATTACK. GPT-4, which has demonstrated robust safety refusals in previous single-turn jailbreaks, performs the worst under our attack, supporting our argument on the potential oversight in the current scope of red teaming and jailbreak approaches.
+          </p>
+          <figure class="image">
+            <img src="./static/images/main_table.png" alt="Attack Success Rates">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Red Queen Guard Section -->
+  <section class="section" id="guard">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Red Queen Guard</h2>
+      <div class="content is-medium">
+        <p>
+          Given the widespread application of LLMs in everyday life, we explore strategies to enhance the safety mechanisms of these models. We investigate whether training models on carefully designed multi-turn datasets using Direct Preference Optimization (DPO) can mitigate this misalignment. We sampled 20 multi-turn data points of successful LLM jailbreaks from each scenario and harmful action category, supplemented with safety responses from Llama 3.1-405b, yielding an 11.2K preference dataset, RED QUEEN GUARD.
+        </p>
+        <p>
+          RED QUEEN GUARD can address the safety misalignment in multi-turn scenarios without compromising the model's reasoning or instruction-following capabilities, highlighting its promising potential for broader usage in general safety alignment.
+        </p>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <figure class="image">
+            <img src="./static/images/red_queen_guard.png" alt="Red Queen Guard">
+          </figure>
+        </div>
+        <div class="column">
+          <figure class="image">
+            <img src="./static/images/dpo_result_plot_new_new.png" alt="DPO Results" style="width: 60%;">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Factors Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3">Key Factors for RED QUEEN ATTACK Success</h2>
+      <p class="is-size-5">
+        The success of RED QUEEN ATTACK highlights the vulnerability of current LLMs. Being the first work to explore jailbreak in multi-turn scenarios with concealment, to stimulate further red teaming and jailbreak research in the multi-turn scenario, we conduct a comprehensive study to analyze the key factors contributing to RED QUEEN ATTACK success:
+      </p>
+      <div class="content">
+        <h3 class="title is-4">Factor 1: Multi-turn Structure & Concealment</h3>
+        <p>
+          RED QUEEN ATTACK differs from previous jailbreaks in two points: the multi-turn structure and the concealment of malicious intent. We conduct an ablation experiment to evaluate the isolated effects. Concealment alone proves to be an effective jailbreak method across all models, highlighting that current LLMs struggle to detect malicious intent. Combining multi-turn structure with concealment significantly enhances ASR.
+        </p>
+        <figure class="image">
+          <img src="./static/images/multi_turn.png" alt="Multi-turn Structure & Concealment" style="width: 60%;">
+        </figure>
+
+        <h3 class="title is-4">Factor 2: Turn Number</h3>
+        <p>
+          Increasing the number of turns by adding questions or details generally increases ASR, especially for models between 8B and 70B. The five-turn scenario works best in six out of ten models, demonstrating the effectiveness of incorporating additional interaction turns. Extended turns result in longer contexts, which can be difficult for current LLMs to manage during inference.
+        </p>
+        <figure class="image">
+          <img src="./static/images/model_comparison.png" alt="Turn Number Impact " style="width: 60%;">
+        </figure>
+
+        <h3 class="title is-4">Factor 3: Model Size</h3>
+        <p>
+          Larger models tend to be more susceptible to RED QUEEN ATTACKS. This increased vulnerability in larger models can be attributed to the mismatch in generalization between continued progress on model capabilities and safety alignment training. Larger models demonstrate a better understanding of language and instruction and can accept fake scenarios easily, while smaller models have difficulty understanding the whole scenario.
+        </p>
+        <figure class="image">
+          <img src="./static/images/model_comparison_new.png" alt="Model Size Impact" style="width: 40%;">
+        </figure>        
+      </div>
+    </div>
+  </section>
+<!-- Ethical Considerations Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3">⚖️ Ethical Considerations</h2>
+    <div class="content is-medium">
+      <p>
+        This study aims to explore potential security vulnerabilities in LLMs. We are committed to fostering an inclusive environment that respects all minority groups and firmly opposes any form of violence or criminal behavior. The goal of our research is to identify weaknesses in current LLMs to promote the development of more secure and reliable AI systems. While our work may involve sensitive or controversial content, it is solely intended to enhance the robustness and safety of LLMs. Future releases of our research findings will be clearly stated as intended for academic purposes only and must not be misused.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Acknowledgement Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3">🙏 Acknowledgement</h2>
+    <div class="content is-medium">
+      <p>
+        We thank our co-authors and colleagues at <a href="https://www.hippocraticai.com/" target="_blank">Hippocratic AI</a> for their valuable contributions to this research. Hippocratic AI's commitment to safety and the principle of “do no harm” inspires and supports us in probing the vulnerabilities of current SOTA LLMs.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- BibTeX Section -->
+  <section class="section" id="bibtex">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">BibTeX</h2>
+      <pre><code>@article{jiang2024red,
+        title={RED QUEEN: Safeguarding Large Language Models against Concealed Multi-Turn Jailbreaking},
+        author={Jiang, Yifan and Aggarwal, Kriti and Laud, Tanmay and Munir, Kashif and Pujara, Jay and Mukherjee, Subhabrata},
+        journal={arXiv preprint arXiv:2409.17458},
+        year={2024}
+      }
+    </code></pre>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>RED QUEEN</strong> by <a href="https://www.linkedin.com/in/yifan-jiang-29199122a/">Yifan Jiang</a>, <a href="https://www.linkedin.com/in/kriti-agg/">Kriti Aggarwal</a>, <a href="https://www.linkedin.com/in/tanmaylaud/">Tanmay Laud</a>, <a href="https://www.linkedin.com/in/kashifmuneir/">Kashif Munir</a>, <a href="https://www.jaypujara.org/">Jay Pujara</a>, and <a href="https://subhomukherjee.com/">Subhabrata Mukherjee</a>.
+      </p>
+      <p>
+        This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
+      <p>
+        <a href="https://github.com/kriti-hippo/red_queen/tree/main" class="icon">
+          <i class="fab fa-github"></i>
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Navbar Burger -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const burger = document.querySelector('.navbar-burger');
+      const menu = document.getElementById('navbarMenu');
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    });
+  </script>
+</body>
+</html>
